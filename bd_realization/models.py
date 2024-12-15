@@ -85,6 +85,7 @@ class AssemblyUnit(Base):
     F1: Mapped[float | None] = mapped_column(nullable=True)
     F_j: Mapped[float | None] = mapped_column(nullable=True)
     F_pred: Mapped[float | None] = mapped_column(nullable=True)
+    F_diff: Mapped[float | None] = mapped_column(nullable=True)
 
 
 class Part(Base):
@@ -120,6 +121,6 @@ class Part(Base):
     Q0: Mapped[float | None] = mapped_column(nullable=True)
     F_c: Mapped[float | None] = mapped_column(nullable=True)
     sigma_sd_diff: Mapped[float | None] = mapped_column(nullable=True)
-    F_diff: Mapped[float | None] = mapped_column(nullable=True)
     sigma_sd_: Mapped[float | None] = mapped_column(nullable=True)
     sigma_v_s: Mapped[float | None] = mapped_column(nullable=True)
+    q: Mapped[float | None] = mapped_column(nullable=True)
