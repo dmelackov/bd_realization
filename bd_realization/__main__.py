@@ -9,11 +9,12 @@ from bd_realization.constant_tables.table3_6 import fill_table as table2
 
 if __name__ == "__main__":
     print(sys.argv)
+
+    create_db_and_tables()
     if len(sys.argv) > 1 and sys.argv[1] == "fill":
         print("Filling constant tables")
         table1()
         table2()
-    create_db_and_tables()
     app = QtWidgets.QApplication([])
     app.setApplicationName("BD Realization")
     widget = MyWidget()

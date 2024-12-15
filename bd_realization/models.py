@@ -122,3 +122,4 @@ class Part(Base):
     sigma_sd_diff: Mapped[float | None] = mapped_column(nullable=True)
     F_diff: Mapped[float | None] = mapped_column(nullable=True)
     sigma_sd_: Mapped[float | None] = mapped_column(nullable=True)
+    sigma_v_s: Mapped[float | None] = mapped_column(nullable=True)

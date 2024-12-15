@@ -24,10 +24,10 @@ def fill_part2(session: Session):
     session.add(Table3_5_2(rubber_mark="ИРП1078", sigma_v_s=6.333))
     session.add(Table3_5_2(rubber_mark="НО-68-1", sigma_v_s=7))
 
-def get_by_rubber_mark(rubber_mark: str) -> Table3_5_2 | None:
+def get_by_rubber_mark(rubber_mark: str) -> Table3_5_2:
     with sessionmanager.session() as session:
-        return session.query(Table3_5_2).filter(Table3_5_2.rubber_mark == rubber_mark).first()
+        return session.query(Table3_5_2).filter(Table3_5_2.rubber_mark == rubber_mark).first() # type: ignore
 
-def get_by_m_and_cable_type(m: int, cable_type: str) -> Table3_5_1 | None:
+def get_by_m_and_cable_type(m: int, cable_type: str) -> Table3_5_1:
     with sessionmanager.session() as session:
-        return session.query(Table3_5_1).filter(Table3_5_1.m == m, Table3_5_1.cable_type == cable_type).first()
+        return session.query(Table3_5_1).filter(Table3_5_1.m == m, Table3_5_1.cable_type == cable_type).first() # type: ignore

@@ -80,8 +80,8 @@ class NodeWidget(QtWidgets.QWidget):
         ]
 
         available_mode = [
-            "Постоянный",
-            "Переменный"
+            "Двухсменный",
+            "Трехсменный"
         ]
 
         self.inner_layout = QtWidgets.QVBoxLayout(self)
@@ -156,7 +156,14 @@ class AssemblyUnitWidget(QtWidgets.QWidget):
         self.a = QtWidgets.QLineEdit()
         self.inner_layout.addWidget(QtWidgets.QLabel("Расстояние между осями шкива, a:"))
         self.inner_layout.addWidget(self.a)
-        
+        self.working_mode = QtWidgets.QComboBox()
+        self.working_mode.addItems(["Постоянный", "Переменный"])
+        self.inner_layout.addWidget(QtWidgets.QLabel("Режим работы:"))
+        self.inner_layout.addWidget(self.working_mode)
+        self.roller_count = QtWidgets.QLineEdit()
+        self.inner_layout.addWidget(QtWidgets.QLabel("Количество роликов, roller_count:"))
+        self.inner_layout.addWidget(self.roller_count)
+
 
         self.button = QtWidgets.QPushButton("Следующий шаг")
         self.button.clicked.connect(self.next)
@@ -174,6 +181,8 @@ class AssemblyUnitWidget(QtWidgets.QWidget):
         current_assembly_unit.F_j = float(self.F_j.text())
         current_assembly_unit.t_ch_j = float(self.t_ch_j.text())
         current_assembly_unit.a = float(self.a.text())
+        current_assembly_unit.working_mode = self.working_mode.currentText()
+        current_assembly_unit.roller_count = int(self.roller_count.text())
         self.next_signal.emit()
 
 
@@ -211,6 +220,11 @@ class Part1Widget(QtWidgets.QWidget):
         self.cable_type.addItems(["1x7", "1x21"])
         self.inner_layout.addWidget(QtWidgets.QLabel("Тип троса, cable_type:"))
         self.inner_layout.addWidget(self.cable_type)
+
+        self.S = QtWidgets.QLineEdit()
+        self.inner_layout.addWidget(QtWidgets.QLabel("Наименьшая толщина зуба, S:"))
+        self.inner_layout.addWidget(self.S)
+        
         
         self.button = QtWidgets.QPushButton("Следующий шаг")
         self.button.clicked.connect(self.next)
@@ -225,6 +239,7 @@ class Part1Widget(QtWidgets.QWidget):
         current_belt.z_p = int(self.z_p.text())
         current_belt.m = float(self.m.text())
         current_belt.cable_type = self.cable_type.currentText()
+        current_belt.S = float(self.S.text())
         self.next_signal.emit()
 
 class Part2Widget(QtWidgets.QWidget):
@@ -308,6 +323,7 @@ class Part3Widget(QtWidgets.QWidget):
         if current_shift_2 is None:
             return
         current_shift_2.z2 = int(self.z2.text())
+        calculate(current_node, current_assembly_unit, current_belt, current_shift_1, current_shift_2)  # type: ignore
         self.next_signal.emit()
 
 class ResultWidget(QtWidgets.QWidget):
