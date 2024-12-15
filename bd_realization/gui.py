@@ -48,7 +48,7 @@ class StartWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.button = QtWidgets.QPushButton("Начать проектировочный расчет")
+        self.button = QtWidgets.QPushButton("Начать проверочный расчет")
         self.button.clicked.connect(self.start)
 
         self.inner_layout = QtWidgets.QVBoxLayout(self)
